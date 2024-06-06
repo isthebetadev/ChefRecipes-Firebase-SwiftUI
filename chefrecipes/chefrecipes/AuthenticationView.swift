@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-struct ContentView: View {
+
+
+struct AuthenticationView: View {
     var body: some View {
         VStack {
             Image(systemName: "fork.knife")
@@ -22,5 +24,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    AuthenticationView()
 }
