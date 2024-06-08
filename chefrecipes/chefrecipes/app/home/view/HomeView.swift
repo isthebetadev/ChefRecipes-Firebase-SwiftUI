@@ -10,7 +10,20 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject var authenticationViewModel: AuthenticationViewModel
     var body: some View {
-        Text("Its Home 🏠")
+        NavigationStack {
+            VStack {
+                if let email = authenticationViewModel.user?.email {
+                    Text("Wellcome back \(email)")
+                }
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("Home")
+            .toolbar {
+                Button(action: { authenticationViewModel.logout() }, label: {
+                    Text("Logout")
+                })
+            }
+        }
     }
 }
 

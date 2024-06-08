@@ -10,6 +10,7 @@ import FirebaseAuth
 
 struct User {
     let email: String
+    var username: String?
 }
 
 final class AuthenticationFirebaseDataSource {

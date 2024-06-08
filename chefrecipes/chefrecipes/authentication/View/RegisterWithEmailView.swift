@@ -12,6 +12,7 @@ struct RegisterWithEmailView: View {
     @ObservedObject var authenticationViewModel: AuthenticationViewModel
     @State private var email: String = ""
     @State private var password: String = ""
+    @State private var username: String = ""
     
     var body: some View {
         VStack {
@@ -31,10 +32,12 @@ struct RegisterWithEmailView: View {
                     .padding(.bottom, 32)
                 TextField("Add your email", text: $email)
                     .keyboardType(.emailAddress)
+                TextField("Add your username", text: $username)
+                    .keyboardType(.alphabet)
                 SecureField("Add your password", text: $password)
                 Button(action: {
                     print("Register form submit")
-                    authenticationViewModel.createNewUser(email: email, password: password)
+                    authenticationViewModel.createNewUser(email: email, password: password, username: username)
                 }, label: {
                     Text("Register")
                 })

@@ -19,12 +19,13 @@ final class AuthenticationViewModel: ObservableObject {
         getCurrentUser()
     }
     
-    func createNewUser(email: String, password: String) {
+    func createNewUser(email: String, password: String, username: String) {
         authenticationRepository.createNewUser(email: email,
                                                password: password) { [weak self] result in
             switch result {
                 case .success(let user):
                     self?.user = user
+                // TODO create user in DB with the username
                 case .failure(let error):
                     self?.messageError = error.localizedDescription
             }
