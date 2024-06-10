@@ -22,6 +22,10 @@
 		451A550F2C121FE200A75651 /* LoginWithEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451A550E2C121FE200A75651 /* LoginWithEmail.swift */; };
 		451A55162C12246300A75651 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451A55152C12246300A75651 /* HomeView.swift */; };
 		451A55182C14676700A75651 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 451A55172C14676700A75651 /* FirebaseFirestore */; };
+		45266F732C175A4100BC5527 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45266F722C175A4100BC5527 /* ProfileView.swift */; };
+		45D67C502C175C5600086E08 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D67C4F2C175C5600086E08 /* InfoView.swift */; };
+		45D67C522C175C6600086E08 /* MyRecipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D67C512C175C6600086E08 /* MyRecipesView.swift */; };
+		45D67C542C175CBA00086E08 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D67C532C175CBA00086E08 /* ProfileViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +42,10 @@
 		451A550C2C121FC500A75651 /* RegisterWithEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterWithEmailView.swift; sourceTree = "<group>"; };
 		451A550E2C121FE200A75651 /* LoginWithEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWithEmail.swift; sourceTree = "<group>"; };
 		451A55152C12246300A75651 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		45266F722C175A4100BC5527 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		45D67C4F2C175C5600086E08 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
+		45D67C512C175C6600086E08 /* MyRecipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipesView.swift; sourceTree = "<group>"; };
+		45D67C532C175CBA00086E08 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,14 +103,14 @@
 		451A54F82C12088700A75651 /* authentication */ = {
 			isa = PBXGroup;
 			children = (
-				451A55002C120F4700A75651 /* ViewModel */,
-				451A54FF2C120F1F00A75651 /* Repository */,
-				451A54FE2C120F1200A75651 /* View */,
+				451A55002C120F4700A75651 /* viewmodel */,
+				451A54FF2C120F1F00A75651 /* repository */,
+				451A54FE2C120F1200A75651 /* view */,
 			);
 			path = authentication;
 			sourceTree = "<group>";
 		};
-		451A54FE2C120F1200A75651 /* View */ = {
+		451A54FE2C120F1200A75651 /* view */ = {
 			isa = PBXGroup;
 			children = (
 				451A54EC2C10C84600A75651 /* AuthenticationView.swift */,
@@ -110,24 +118,24 @@
 				451A550C2C121FC500A75651 /* RegisterWithEmailView.swift */,
 				451A550E2C121FE200A75651 /* LoginWithEmail.swift */,
 			);
-			path = View;
+			path = view;
 			sourceTree = "<group>";
 		};
-		451A54FF2C120F1F00A75651 /* Repository */ = {
+		451A54FF2C120F1F00A75651 /* repository */ = {
 			isa = PBXGroup;
 			children = (
 				451A55032C121BA200A75651 /* AuthenticationFirebaseDataSource.swift */,
 				451A55082C121C4E00A75651 /* AuthenticationRepository.swift */,
 			);
-			path = Repository;
+			path = repository;
 			sourceTree = "<group>";
 		};
-		451A55002C120F4700A75651 /* ViewModel */ = {
+		451A55002C120F4700A75651 /* viewmodel */ = {
 			isa = PBXGroup;
 			children = (
 				451A550A2C121C7900A75651 /* AuthenticationViewModel.swift */,
 			);
-			path = ViewModel;
+			path = viewmodel;
 			sourceTree = "<group>";
 		};
 		451A55052C121BE400A75651 /* Frameworks */ = {
@@ -158,6 +166,9 @@
 		451A55122C12241200A75651 /* profile */ = {
 			isa = PBXGroup;
 			children = (
+				45266F712C175A0800BC5527 /* viewmodel */,
+				45266F702C175A0100BC5527 /* repository */,
+				45266F6F2C1759F900BC5527 /* view */,
 			);
 			path = profile;
 			sourceTree = "<group>";
@@ -175,6 +186,31 @@
 				451A55152C12246300A75651 /* HomeView.swift */,
 			);
 			path = view;
+			sourceTree = "<group>";
+		};
+		45266F6F2C1759F900BC5527 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				45266F722C175A4100BC5527 /* ProfileView.swift */,
+				45D67C4F2C175C5600086E08 /* InfoView.swift */,
+				45D67C512C175C6600086E08 /* MyRecipesView.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		45266F702C175A0100BC5527 /* repository */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = repository;
+			sourceTree = "<group>";
+		};
+		45266F712C175A0800BC5527 /* viewmodel */ = {
+			isa = PBXGroup;
+			children = (
+				45D67C532C175CBA00086E08 /* ProfileViewModel.swift */,
+			);
+			path = viewmodel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,13 +293,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				451A55162C12246300A75651 /* HomeView.swift in Sources */,
+				45D67C502C175C5600086E08 /* InfoView.swift in Sources */,
 				451A550B2C121C7900A75651 /* AuthenticationViewModel.swift in Sources */,
+				45266F732C175A4100BC5527 /* ProfileView.swift in Sources */,
 				451A54ED2C10C84600A75651 /* AuthenticationView.swift in Sources */,
 				451A55042C121BA200A75651 /* AuthenticationFirebaseDataSource.swift in Sources */,
 				451A54EB2C10C84600A75651 /* chefrecipesApp.swift in Sources */,
 				451A550F2C121FE200A75651 /* LoginWithEmail.swift in Sources */,
 				451A55092C121C4E00A75651 /* AuthenticationRepository.swift in Sources */,
 				451A550D2C121FC500A75651 /* RegisterWithEmailView.swift in Sources */,
+				45D67C542C175CBA00086E08 /* ProfileViewModel.swift in Sources */,
+				45D67C522C175C6600086E08 /* MyRecipesView.swift in Sources */,
 				451A55022C121B2600A75651 /* DismissView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

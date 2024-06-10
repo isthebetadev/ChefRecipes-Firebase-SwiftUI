@@ -12,16 +12,27 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                if let user = authenticationViewModel.user {
-                    Text("Wellcome back \(user.username!)")
+                TabView {
+                    
+                    Text("Home view")
+                        .tabItem {
+                            Image(systemName: "house")
+                            Text("Home")
+                        }
+                    
+                    Text("Search recipes view")
+                        .tabItem {
+                            Image(systemName: "magnifyingglass")
+                            Text("Search")
+                        }
+                    
+                    ProfileView(authenticationViewModel: authenticationViewModel)
+                        .tabItem {
+                            Image(systemName: "person")
+                            Text("Profile")
+                        }
+                    
                 }
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("Home")
-            .toolbar {
-                Button(action: { authenticationViewModel.logout() }, label: {
-                    Text("Logout")
-                })
             }
         }
     }
