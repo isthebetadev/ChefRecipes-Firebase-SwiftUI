@@ -12,8 +12,8 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                if let email = authenticationViewModel.user?.email {
-                    Text("Wellcome back \(email)")
+                if let user = authenticationViewModel.user {
+                    Text("Wellcome back \(user.username!)")
                 }
             }
             .navigationBarTitleDisplayMode(.inline)

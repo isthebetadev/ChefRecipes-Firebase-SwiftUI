@@ -21,6 +21,7 @@
 		451A550D2C121FC500A75651 /* RegisterWithEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451A550C2C121FC500A75651 /* RegisterWithEmailView.swift */; };
 		451A550F2C121FE200A75651 /* LoginWithEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451A550E2C121FE200A75651 /* LoginWithEmail.swift */; };
 		451A55162C12246300A75651 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451A55152C12246300A75651 /* HomeView.swift */; };
+		451A55182C14676700A75651 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 451A55172C14676700A75651 /* FirebaseFirestore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 			files = (
 				451A54FD2C120B9C00A75651 /* FirebaseAnalytics in Frameworks */,
 				451A55072C121BE400A75651 /* FirebaseAuth in Frameworks */,
+				451A55182C14676700A75651 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +196,7 @@
 			packageProductDependencies = (
 				451A54FC2C120B9C00A75651 /* FirebaseAnalytics */,
 				451A55062C121BE400A75651 /* FirebaseAuth */,
+				451A55172C14676700A75651 /* FirebaseFirestore */,
 			);
 			productName = chefrecipes;
 			productReference = 451A54E72C10C84600A75651 /* chefrecipes.app */;
@@ -487,6 +490,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 451A54FB2C120B9C00A75651 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		451A55172C14676700A75651 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 451A54FB2C120B9C00A75651 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

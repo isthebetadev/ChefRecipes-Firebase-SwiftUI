@@ -25,11 +25,16 @@ final class AuthenticationViewModel: ObservableObject {
             switch result {
                 case .success(let user):
                     self?.user = user
-                // TODO create user in DB with the username
+                    self!.createNewUserInCollection(email: email, username: username)
                 case .failure(let error):
                     self?.messageError = error.localizedDescription
             }
         }
+    }
+    
+    func createNewUserInCollection(email: String, username: String) {
+        let userToCreate: User = User(email: email, username: username)
+        self.authenticationRepository.createNewUserInCollection(with: userToCreate)
     }
     
     func getCurrentUser() {

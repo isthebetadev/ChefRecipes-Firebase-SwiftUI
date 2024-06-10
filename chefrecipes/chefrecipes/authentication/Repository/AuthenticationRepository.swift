@@ -13,6 +13,11 @@ final class AuthenticationRepository {
     init(authenticationFirebaseDataSource: AuthenticationFirebaseDataSource = AuthenticationFirebaseDataSource()) {
         self.authenticationFirebaseDataSource = authenticationFirebaseDataSource
     }
+
+    
+    func createNewUserInCollection(with user: User) {
+        authenticationFirebaseDataSource.createNewUserInFirebaseCollection(with: user)
+    }
     
     func createNewUser(email: String, password: String, completionBlock: @escaping (Result<User, Error>) -> Void) {
         authenticationFirebaseDataSource.createNewUser(email: email,
