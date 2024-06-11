@@ -15,7 +15,7 @@ struct ProfileView: View {
     var body: some View {
         VStack {
             InfoView(authenticationViewModel: authenticationViewModel)
-            MyRecipesView()
+            MyRecipesView(authenticationViewModel: authenticationViewModel, profileViewModel: profileViewModel)
         }
     }
 }

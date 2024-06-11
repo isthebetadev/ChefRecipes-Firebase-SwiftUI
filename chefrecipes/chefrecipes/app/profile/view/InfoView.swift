@@ -12,7 +12,8 @@ struct InfoView: View {
     var body: some View {
         
         VStack {
-            Label("My profile", systemImage: "person")
+            
+            Label("My profile", systemImage: "person.fill")
                 .font(.title2)
                 .bold()
                 .padding()
@@ -20,23 +21,24 @@ struct InfoView: View {
             if let email = authenticationViewModel.user?.email {
                 Text("Email: \(email)")
             }
+            
             Text("Username: ")
+            
             Button(action: {
                 print("Reset the password")
             }, label: {
                 Label("Reset your password", systemImage: "key")
             })
+            .buttonStyle(.bordered)
+            
             Button(action: {
                 print("Logout the sesion")
                 authenticationViewModel.logout()
             }, label: {
                 Label("Log out", systemImage: "rectangle.portrait.and.arrow.right")
             })
+            .buttonStyle(.bordered)
         }
-        .background(Color.white)
-        .cornerRadius(10)
-        .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 5)
-        .padding([.leading, .trailing])
         
         
     }
