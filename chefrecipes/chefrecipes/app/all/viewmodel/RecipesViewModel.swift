@@ -1,13 +1,13 @@
 //
-//  ProfileViewModel.swift
+//  RecipesViewModel.swift
 //  chefrecipes
 //
-//  Created by Ruben on 10/6/24.
+//  Created by Ruben on 11/6/24.
 //
 
 import Foundation
 
-final class ProfileViewModel: ObservableObject {
+final class RecipesViewModel: ObservableObject {
     
     @Published var myRecipes: [MyRecipeModel] = []
     @Published var messageError: String?
@@ -19,7 +19,7 @@ final class ProfileViewModel: ObservableObject {
     }
     
     func getMyUserRecipes(userEmail email: String) {
-        profileRepository.getAllLinks(userEmail: email) { [weak self] result in
+        profileRepository.getMyRecipes(userEmail: email) { [weak self] result in
             switch result {
             case .success(let recipeModels):
                 self?.myRecipes = recipeModels
@@ -29,4 +29,7 @@ final class ProfileViewModel: ObservableObject {
         }
     }
     
+    func deleteRecipe(recipe: MyRecipeModel) {
+        profileRepository.deleteRecipe(recipe: recipe)
+    }
 }

@@ -15,8 +15,12 @@ final class ProfileRepository {
         self.profileDataSource = profileDataSource
     }
     
-    func getAllLinks(userEmail email: String,completionBlock: @escaping (Result<[MyRecipeModel], Error>) -> Void) {
+    func getMyRecipes(userEmail email: String,completionBlock: @escaping (Result<[MyRecipeModel], Error>) -> Void) {
         profileDataSource.getRecipesForMyUser(userEmail: email, completionBlock: completionBlock)
+    }
+    
+    func deleteRecipe(recipe: MyRecipeModel) {
+        profileDataSource.deleteRecipe(recipe: recipe)
     }
     
 }

@@ -15,6 +15,7 @@ struct MyRecipeModel: Decodable, Encodable, Identifiable, Hashable {
     let fromUser: String
     let ingredients: [String]
     let steps: [String]
+    let savedBy: [String]
 }
 
 final class ProfileDataSource {
@@ -38,6 +39,13 @@ final class ProfileDataSource {
                                      .compactMap { $0 }
                 completionBlock(.success(links))
             }
+    }
+    
+    func deleteRecipe(recipe: MyRecipeModel) {
+        guard let documentId = recipe.id else {
+            return
+        }
+        database.collection(recipesCollection).document(documentId).delete()
     }
     
 }
