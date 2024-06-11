@@ -7,19 +7,20 @@
 
 import Foundation
 
-final class RecipesViewModel: ObservableObject {
+final class RecipeViewModel: ObservableObject {
     
     @Published var myRecipes: [MyRecipeModel] = []
     @Published var messageError: String?
     
-    private let profileRepository: ProfileRepository
+    private let recipeRepository: RecipeRepository
     
-    init(profileRepository: ProfileRepository = ProfileRepository()) {
-        self.profileRepository = profileRepository
+    init(recipeRepository: RecipeRepository = RecipeRepository()) {
+
+        self.recipeRepository = recipeRepository
     }
     
     func getMyUserRecipes(userEmail email: String) {
-        profileRepository.getMyRecipes(userEmail: email) { [weak self] result in
+        recipeRepository.getMyRecipes(userEmail: email) { [weak self] result in
             switch result {
             case .success(let recipeModels):
                 self?.myRecipes = recipeModels
@@ -30,6 +31,6 @@ final class RecipesViewModel: ObservableObject {
     }
     
     func deleteRecipe(recipe: MyRecipeModel) {
-        profileRepository.deleteRecipe(recipe: recipe)
+        recipeRepository.deleteRecipe(recipe: recipe)
     }
 }

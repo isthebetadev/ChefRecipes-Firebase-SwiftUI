@@ -10,7 +10,7 @@ import SwiftUI
 struct MyRecipesView: View {
     
     @ObservedObject var authenticationViewModel: AuthenticationViewModel
-    @ObservedObject var recipeViewModel: RecipesViewModel
+    @ObservedObject var recipeViewModel: RecipeViewModel
     @State private var isPresentingNewRecipeSheet = false
     
     var body: some View {
@@ -71,5 +71,5 @@ struct MyRecipesView: View {
 }
 
 #Preview {
-    MyRecipesView(authenticationViewModel: AuthenticationViewModel(), recipeViewModel: RecipesViewModel())
+    MyRecipesView(authenticationViewModel: AuthenticationViewModel(), recipeViewModel: RecipeViewModel())
 }
