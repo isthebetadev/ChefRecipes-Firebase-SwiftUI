@@ -33,4 +33,15 @@ final class RecipeViewModel: ObservableObject {
     func deleteRecipe(recipe: MyRecipeModel) {
         recipeRepository.deleteRecipe(recipe: recipe)
     }
+    
+    func createNewRecipe(with recipe: MyRecipeModel) {
+        recipeRepository.createNewRecipe(withRecipe: recipe, completionBlock: { [weak self] result in
+            switch result {
+            case .success(let recipeModel):
+                print("✅ Guardada receta con \(recipe.title)")
+            case .failure(let error):
+                self?.messageError = error.localizedDescription
+            }
+        })
+    }
 }

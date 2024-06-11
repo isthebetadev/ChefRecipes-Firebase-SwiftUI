@@ -20,8 +20,29 @@ struct MyRecipeDataView: View {
                 Text(recipe.description)
                     .font(.subheadline)
                     .foregroundColor(.gray)
+                Text("Created at \(formattedDate(from: recipe.creationDate))")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
             }
             .padding()
+            
+            VStack(alignment: .leading) {
+                Text("Status:")
+                    .font(.headline)
+                HStack {
+                    if recipe.isPublic {
+                        Text("public")
+                            .font(.subheadline)
+                        Image(systemName: "globe")
+                    } else {
+                        Text("private")
+                            .font(.subheadline)
+                        Image(systemName: "lock")
+                    }
+                    
+                }
+            }
+            .padding([.leading, .bottom, .trailing])
             
             VStack(alignment: .leading) {
                 Text("Ingredients")
@@ -52,8 +73,16 @@ struct MyRecipeDataView: View {
         .padding([.leading, .trailing])
                     
     }
+    
+    func formattedDate(from timeInterval: TimeInterval) -> String {
+        let date = Date(timeIntervalSince1970: timeInterval)
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter.string(from: date)
+    }
 }
 
 #Preview {
-    MyRecipeDataView(recipe: .init(title: "", description: "", fromUser: "", ingredients: [], steps: [], savedBy: []))
+    MyRecipeDataView(recipe: .init(title: "", description: "", fromUser: "", ingredients: [], steps: [], savedBy: [], isPublic: true, creationDate: Date().timeIntervalSince1970))
 }

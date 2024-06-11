@@ -23,4 +23,8 @@ final class RecipeRepository {
         recipeDataSource.deleteRecipe(recipe: recipe)
     }
     
+    func createNewRecipe(withRecipe recipe: MyRecipeModel, completionBlock: @escaping (Result<MyRecipeModel, Error>) -> Void) {
+        recipeDataSource.createRecipe(with: recipe, completionBlock: completionBlock)
+    }
+    
 }

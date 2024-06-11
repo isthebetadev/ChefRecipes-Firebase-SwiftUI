@@ -61,7 +61,9 @@ struct MyRecipesView: View {
                 recipeViewModel.getMyUserRecipes(userEmail: authenticationViewModel.user!.email)
             }
             .sheet(isPresented: $isPresentingNewRecipeSheet, content: {
-                NewRecipeSheet()
+                if let userEmail = authenticationViewModel.user?.email {
+                    NewRecipeSheet(recipeViewModel: recipeViewModel, fromUser: userEmail)
+                }
             })
             
         }

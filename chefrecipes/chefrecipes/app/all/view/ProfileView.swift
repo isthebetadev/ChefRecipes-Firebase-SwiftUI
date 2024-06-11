@@ -11,11 +11,12 @@ struct ProfileView: View {
     
     @ObservedObject var authenticationViewModel: AuthenticationViewModel
     @StateObject var profileViewModel: ProfileViewModel = ProfileViewModel()
+    @StateObject var recipeViewModel: RecipeViewModel = RecipeViewModel()
     
     var body: some View {
         VStack {
             InfoView(authenticationViewModel: authenticationViewModel)
-            MyRecipesView(authenticationViewModel: authenticationViewModel, profileViewModel: profileViewModel)
+            MyRecipesView(authenticationViewModel: authenticationViewModel, recipeViewModel: recipeViewModel)
         }
     }
 }

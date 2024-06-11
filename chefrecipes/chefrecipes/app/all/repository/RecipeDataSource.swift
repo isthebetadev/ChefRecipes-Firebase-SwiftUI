@@ -18,6 +18,8 @@ struct MyRecipeModel: Decodable, Encodable, Identifiable, Hashable {
     let ingredients: [String]
     let steps: [String]
     let savedBy: [String]
+    let isPublic: Bool
+    let creationDate: TimeInterval
 }
 
 final class RecipeDataSource {
@@ -47,5 +49,15 @@ final class RecipeDataSource {
             return
         }
         database.collection(recipesCollection).document(documentId).delete()
+    }
+    
+    func createRecipe(with recipe: MyRecipeModel, completionBlock: @escaping (Result<MyRecipeModel, Error>) -> Void) {
+        do {
+            _ = try database.collection(recipesCollection).addDocument(from: recipe)
+            completionBlock(.success(recipe))
+        } catch {
+            print("❌ Error creating recipe ")
+            completionBlock(.failure(error))
+        }
     }
 }
