@@ -9,6 +9,9 @@ import SwiftUI
 
 struct MostSavedRecipesView: View {
     var body: some View {
+        
+        @StateObject var recipeViewModel: RecipeViewModel = RecipeViewModel()
+        
         VStack {
             Text("💚 These are the most saved by all users")
                 .font(.title2)

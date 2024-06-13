@@ -25,6 +25,7 @@ struct UserHomeView: View {
                     .underline()
                 Spacer()
                 RecipeOfTheDayView()
+                MostSavedRecipesView()
             }
             .padding()
             
