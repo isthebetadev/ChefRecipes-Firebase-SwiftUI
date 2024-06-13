@@ -17,7 +17,7 @@ struct MostSavedRecipesView: View {
                 .font(.title2)
             Spacer()
         }
-        .padding()
+        .padding([.leading, .bottom, .trailing])
     }
 }
 
