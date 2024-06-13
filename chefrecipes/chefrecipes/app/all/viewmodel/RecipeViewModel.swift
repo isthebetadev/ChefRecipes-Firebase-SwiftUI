@@ -10,13 +10,27 @@ import Foundation
 final class RecipeViewModel: ObservableObject {
     
     @Published var myRecipes: [MyRecipeModel] = []
+    @Published var recipeOfTheDay: MyRecipeModel?
     @Published var messageError: String?
     
     private let recipeRepository: RecipeRepository
     
     init(recipeRepository: RecipeRepository = RecipeRepository()) {
-
         self.recipeRepository = recipeRepository
+    }
+    
+    func updateRecipeOfTheDay() {
+
+        recipeRepository.getAllRecipes { [weak self] result in
+            switch result {
+            case .success(let recipeModels):
+                if let randomElement = recipeModels.randomElement() {
+                    self!.recipeOfTheDay = randomElement
+                }
+            case .failure(let error):
+                self?.messageError = error.localizedDescription
+            }
+        }
     }
     
     func getMyUserRecipes(userEmail email: String) {

@@ -26,11 +26,11 @@ final class RecipeDataSource {
     private let database = Firestore.firestore()
     private let recipesCollection = "recipes"
     
-    func getRecipesForMyUser(userEmail email: String,completionBlock: @escaping (Result<[MyRecipeModel], Error>) -> Void) {
-        database.collection(recipesCollection).whereField("fromUser", isEqualTo: email)
+    func getAllRecipes(completionBlock: @escaping (Result<[MyRecipeModel], Error>) -> Void) {
+        database.collection(recipesCollection)
             .addSnapshotListener { query, error in
                 if let error = error {
-                    print("Error getting all links \(error.localizedDescription)")
+                    print("❌ Error getting all recipes \(error.localizedDescription)")
                     completionBlock(.failure(error))
                     return
                 }
@@ -38,9 +38,27 @@ final class RecipeDataSource {
                     completionBlock(.success([]))
                     return
                 }
-                let links = documents.map { try? $0.data(as: MyRecipeModel.self) }
+                let recipes = documents.map { try? $0.data(as: MyRecipeModel.self) }
                                      .compactMap { $0 }
-                completionBlock(.success(links))
+                completionBlock(.success(recipes))
+            }
+    }
+    
+    func getRecipesForMyUser(userEmail email: String,completionBlock: @escaping (Result<[MyRecipeModel], Error>) -> Void) {
+        database.collection(recipesCollection).whereField("fromUser", isEqualTo: email)
+            .addSnapshotListener { query, error in
+                if let error = error {
+                    print("❌ Error getting recipes for user \(email) -> \(error.localizedDescription)")
+                    completionBlock(.failure(error))
+                    return
+                }
+                guard let documents = query?.documents.compactMap({ $0 }) else {
+                    completionBlock(.success([]))
+                    return
+                }
+                let recipes = documents.map { try? $0.data(as: MyRecipeModel.self) }
+                                     .compactMap { $0 }
+                completionBlock(.success(recipes))
             }
     }
     

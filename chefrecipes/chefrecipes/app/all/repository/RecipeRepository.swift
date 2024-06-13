@@ -15,6 +15,10 @@ final class RecipeRepository {
         self.recipeDataSource = recipeDataSource
     }
     
+    func getAllRecipes(completionBlock: @escaping (Result<[MyRecipeModel], Error>) -> Void) {
+        recipeDataSource.getAllRecipes(completionBlock: completionBlock)
+    }
+    
     func getMyRecipes(userEmail email: String,completionBlock: @escaping (Result<[MyRecipeModel], Error>) -> Void) {
         recipeDataSource.getRecipesForMyUser(userEmail: email, completionBlock: completionBlock)
     }

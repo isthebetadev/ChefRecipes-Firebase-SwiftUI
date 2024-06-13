@@ -24,6 +24,7 @@ struct UserHomeView: View {
                     .font(.subheadline)
                     .underline()
                 Spacer()
+                RecipeOfTheDayView()
             }
             .padding()
             
