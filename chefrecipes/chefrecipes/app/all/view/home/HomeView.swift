@@ -14,7 +14,7 @@ struct HomeView: View {
             VStack {
                 TabView {
                     
-                    Text("Home view")
+                    UserHomeView(userEmail: authenticationViewModel.user?.email ?? "")
                         .tabItem {
                             Image(systemName: "house")
                             Text("Home")

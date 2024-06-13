@@ -14,9 +14,12 @@ struct ProfileView: View {
     @StateObject var recipeViewModel: RecipeViewModel = RecipeViewModel()
     
     var body: some View {
-        VStack {
-            InfoView(authenticationViewModel: authenticationViewModel)
-            MyRecipesView(authenticationViewModel: authenticationViewModel, recipeViewModel: recipeViewModel)
+        ZStack {
+            Color.myYellow.ignoresSafeArea()
+            VStack {
+                InfoView(authenticationViewModel: authenticationViewModel)
+                MyRecipesView(authenticationViewModel: authenticationViewModel, recipeViewModel: recipeViewModel)
+            }
         }
     }
 }
