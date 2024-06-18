@@ -9,8 +9,7 @@ import SwiftUI
 
 struct RecipeOfTheDayView: View {
     
-
-    @StateObject var recipeViewModel: RecipeViewModel = RecipeViewModel()
+    @ObservedObject var viewModel: RecipeViewModel
     @State private var isPresentingRecipeOfTheDaySheet = false
     
     var body: some View {
@@ -18,7 +17,7 @@ struct RecipeOfTheDayView: View {
             VStack {
                 Text("🌱 Here is our recipe of the day")
                     .font(.title2)
-                if let recipe = recipeViewModel.recipeOfTheDay {
+                if let recipe = viewModel.recipeOfTheDay {
                     Image("recipeoftheday")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -31,7 +30,7 @@ struct RecipeOfTheDayView: View {
                     Text(recipe.title)
                         .font(.headline)
                         .padding(.top, 10)
-                    Text(recipe.description)
+                    Text("\(recipe.description.prefix(100))...")
                         .font(.subheadline)
                         .padding(.bottom, 10)
                 } else {
@@ -42,11 +41,8 @@ struct RecipeOfTheDayView: View {
                 Spacer()
             }
             .padding()
-            .task {
-                recipeViewModel.updateRecipeOfTheDay()
-            }
             .sheet(isPresented: $isPresentingRecipeOfTheDaySheet) {
-                if let recipe = recipeViewModel.recipeOfTheDay {
+                if let recipe = viewModel.recipeOfTheDay {
                     MyRecipeDataView(recipe: recipe)
                 }
             }
@@ -55,8 +51,8 @@ struct RecipeOfTheDayView: View {
     }
 }
 
-/*
+
 #Preview {
-    RecipeOfTheDayView()
+    RecipeOfTheDayView(viewModel: RecipeViewModel())
 }
-*/
+

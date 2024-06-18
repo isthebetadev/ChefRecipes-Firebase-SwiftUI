@@ -10,6 +10,7 @@ import Foundation
 final class RecipeViewModel: ObservableObject {
     
     @Published var myRecipes: [MyRecipeModel] = []
+    @Published var recipesInTopThreeRanking: [MyRecipeModel] = []
     @Published var recipeOfTheDay: MyRecipeModel?
     @Published var messageError: String?
     
@@ -17,10 +18,32 @@ final class RecipeViewModel: ObservableObject {
     
     init(recipeRepository: RecipeRepository = RecipeRepository()) {
         self.recipeRepository = recipeRepository
+        updateRecipeOfTheDay()
+        updateTopThreeSavedRecipes()
+    }
+    
+    func updateTopThreeSavedRecipes() {
+        recipeRepository.getAllRecipes { [weak self] result in
+            switch result {
+            case .success(let recipeModels):
+                self?.recipesInTopThreeRanking = []
+                if recipeModels.count > 0 {
+                    let sortedRecipes = recipeModels.sorted(by: { $0.savedBy.count > $1.savedBy.count })
+                    if sortedRecipes.count >= 3 {
+                        self?.recipesInTopThreeRanking.append(sortedRecipes[0])
+                        self?.recipesInTopThreeRanking.append(sortedRecipes[1])
+                        self?.recipesInTopThreeRanking.append(sortedRecipes[2])
+                    } else {
+                        self?.recipesInTopThreeRanking.append(contentsOf: sortedRecipes)
+                    }
+                }
+            case .failure(let error):
+                self?.messageError = error.localizedDescription
+            }
+        }
     }
     
     func updateRecipeOfTheDay() {
-
         recipeRepository.getAllRecipes { [weak self] result in
             switch result {
             case .success(let recipeModels):
