@@ -8,19 +8,32 @@
 import SwiftUI
 
 struct MostSavedRecipesView: View {
+    
     @ObservedObject var viewModel: RecipeViewModel
+    @State private var isPresentingRecipeSheet = false
+    
     var body: some View {
-        VStack {
-            Text("💚 These are the most saved by all users")
-                .font(.title2)
-            
-            ForEach(Array(viewModel.recipesInTopThreeRanking.enumerated()), id: \.offset) { index, recipe in
-                RankingItem(position: index+1, title: recipe.title, savedBy: recipe.savedBy.count)
-            }
+        NavigationStack {
+            VStack {
+                Text("💚 These are the most saved by all users")
+                    .font(.title2)
+                
+                ForEach(Array(viewModel.recipesInTopThreeRanking.enumerated()), id: \.offset) { index, recipe in
+                    RankingItem(position: index+1, title: recipe.title, savedBy: recipe.savedBy.count)
+                        .onTapGesture {
+                            isPresentingRecipeSheet = true
+                        }
+                }
 
-            Spacer()
+                Spacer()
+            }
+            .sheet(isPresented: $isPresentingRecipeSheet) {
+                if let recipe = viewModel.recipeOfTheDay {
+                    MyRecipeDataView(recipe: recipe)
+                }
+            }
+            .padding([.leading, .bottom, .trailing])
         }
-        .padding([.leading, .bottom, .trailing])
     }
 }
 
