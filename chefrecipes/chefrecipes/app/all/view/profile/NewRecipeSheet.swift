@@ -22,40 +22,43 @@ struct NewRecipeSheet: View {
     
     var body: some View {
         NavigationStack {
-            Form {
-                Section(header: Text("Recipe details")) {
-                    TextField("Title", text: $title)
-                    TextField("Description", text: $description)
-                    Toggle(isOn: $isPublic) {
-                        Text("Status")
+            ZStack {
+                Color.myGreen.ignoresSafeArea()
+                Form {
+                    Section(header: Text("Recipe details")) {
+                        TextField("Title", text: $title)
+                        TextField("Description", text: $description)
+                        Toggle(isOn: $isPublic) {
+                            Text("Status")
+                        }
                     }
-                }
-                
-                Section(header: Text("Ingredients")) {
-                    ForEach(0..<ingredients.count, id: \.self) { index in
-                        TextField("Ingredient \(index + 1)", text: Binding(
-                            get: { self.ingredients[index] },
-                            set: { self.ingredients[index] = $0 }
-                        ))
+                    
+                    Section(header: Text("Ingredients")) {
+                        ForEach(0..<ingredients.count, id: \.self) { index in
+                            TextField("Ingredient \(index + 1)", text: Binding(
+                                get: { self.ingredients[index] },
+                                set: { self.ingredients[index] = $0 }
+                            ))
+                        }
+                        Button(action: {
+                            ingredients.append("")
+                        }) {
+                            Label("Add ingredients", systemImage: "plus")
+                        }
                     }
-                    Button(action: {
-                        ingredients.append("")
-                    }) {
-                        Label("Add ingredients", systemImage: "plus")
-                    }
-                }
-                
-                Section(header: Text("Steps")) {
-                    ForEach(0..<steps.count, id: \.self) { index in
-                        TextField("Step \(index + 1)", text: Binding(
-                            get: { self.steps[index] },
-                            set: { self.steps[index] = $0 }
-                        ))
-                    }
-                    Button(action: {
-                        steps.append("")
-                    }) {
-                        Label("Add step", systemImage: "plus")
+                    
+                    Section(header: Text("Steps")) {
+                        ForEach(0..<steps.count, id: \.self) { index in
+                            TextField("Step \(index + 1)", text: Binding(
+                                get: { self.steps[index] },
+                                set: { self.steps[index] = $0 }
+                            ))
+                        }
+                        Button(action: {
+                            steps.append("")
+                        }) {
+                            Label("Add step", systemImage: "plus")
+                        }
                     }
                 }
             }
