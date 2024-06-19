@@ -20,6 +20,7 @@ struct MyRecipeModel: Decodable, Encodable, Identifiable, Hashable {
     let savedBy: [String]
     let isPublic: Bool
     let creationDate: TimeInterval
+    let category: String
 }
 
 final class RecipeDataSource {

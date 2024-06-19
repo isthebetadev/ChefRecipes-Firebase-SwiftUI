@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+enum Category: String, CaseIterable, Identifiable {
+    case breakfast, lunch, snack, dinner
+    var id: String { self.rawValue }
+}
+
 struct NewRecipeSheet: View {
     
     @Environment(\.presentationMode) var presentationMode
@@ -18,12 +23,15 @@ struct NewRecipeSheet: View {
     @State private var ingredients: [String] = []
     @State private var steps: [String] = []
     @State private var isPublic: Bool = true
+    @State private var selectedCategory: Category = .breakfast
     @State var fromUser: String = ""
     
+    
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color.myGreen.ignoresSafeArea()
+        ZStack {
+            Color.myGreen.edgesIgnoringSafeArea(.all)
+            NavigationStack {
+                
                 Form {
                     Section(header: Text("Recipe details")) {
                         TextField("Title", text: $title)
@@ -47,6 +55,15 @@ struct NewRecipeSheet: View {
                         }
                     }
                     
+                    Section(header: Text("Category")) {
+                        Picker("Select Category", selection: $selectedCategory) {
+                            ForEach(Category.allCases) { category in
+                                Text(category.rawValue).tag(category)
+                            }
+                        }
+                        .pickerStyle(SegmentedPickerStyle())
+                    }
+                    
                     Section(header: Text("Steps")) {
                         ForEach(0..<steps.count, id: \.self) { index in
                             TextField("Step \(index + 1)", text: Binding(
@@ -61,17 +78,18 @@ struct NewRecipeSheet: View {
                         }
                     }
                 }
-            }
-            .navigationTitle("New recipe")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
-                        presentationMode.wrappedValue.dismiss()
+                .background(Color.clear)
+                .navigationTitle("New recipe")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Cancel") {
+                            presentationMode.wrappedValue.dismiss()
+                        }
                     }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Save") {
-                        saveRecipe()
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Save") {
+                            saveRecipe()
+                        }
                     }
                 }
             }
@@ -80,14 +98,15 @@ struct NewRecipeSheet: View {
     
     func saveRecipe() {
         
-        let recipe: MyRecipeModel = .init(title: title, 
+        let recipe: MyRecipeModel = .init(title: title,
                                           description: description,
                                           fromUser: fromUser,
                                           ingredients: ingredients,
                                           steps: steps,
                                           savedBy: [fromUser],
                                           isPublic: isPublic,
-                                          creationDate: Date().timeIntervalSince1970)
+                                          creationDate: Date().timeIntervalSince1970,
+                                          category: selectedCategory.rawValue)
         
         recipeViewModel.createNewRecipe(with: recipe)
         

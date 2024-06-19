@@ -25,6 +25,16 @@ struct MyRecipeDataView: View {
                     Text("Created at \(formattedDate(from: recipe.creationDate))")
                         .font(.subheadline)
                         .foregroundColor(.gray)
+                        .padding([.top], 5)
+                }
+                .padding()
+                
+                VStack(alignment: .leading) {
+                    Text("Category:")
+                        .font(.headline)
+                    Text(recipe.category)
+                        .font(.subheadline)
+                        .background(Capsule().fill(Color.mint))
                 }
                 .padding()
                 
@@ -87,5 +97,5 @@ struct MyRecipeDataView: View {
 }
 
 #Preview {
-    MyRecipeDataView(recipe: .init(title: "", description: "", fromUser: "", ingredients: [], steps: [], savedBy: [], isPublic: true, creationDate: Date().timeIntervalSince1970))
+    MyRecipeDataView(recipe: .init(title: "", description: "", fromUser: "", ingredients: [], steps: [], savedBy: [], isPublic: true, creationDate: Date().timeIntervalSince1970, category: "dinner"))
 }
