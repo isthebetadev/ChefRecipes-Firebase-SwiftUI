@@ -37,6 +37,7 @@ struct DiscoverByCategoriesView: View {
                                     Text(image)
                                         .font(.caption)
                                         .italic()
+                                        .background(.mint)
                                 }
                                 
                             }
