@@ -18,20 +18,22 @@ struct DiscoverByCategoriesView: View {
     ]
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             VStack {
                 Text("🥑 Discover them by categories")
                     .font(.title2)
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 20) {
                         ForEach(categoriesImage, id:  \.self) { image in
-                            Image(image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 120, height: 120)
-                                .clipped()
-                                .cornerRadius(10)
-                                .shadow(radius: 5)
+                            NavigationLink(destination: RecipesForACategoryView(viewModel: viewModel, category: image)) {
+                                Image(image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 120, height: 120)
+                                    .clipped()
+                                    .cornerRadius(10)
+                                    .shadow(radius: 5)
+                            }
                         }
                     }
                 }
