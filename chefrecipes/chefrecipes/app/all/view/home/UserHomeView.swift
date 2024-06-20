@@ -26,6 +26,7 @@ struct UserHomeView: View {
                     Spacer()
                     RecipeOfTheDayView(viewModel: recipeViewModel)
                     MostSavedRecipesView(viewModel: recipeViewModel)
+                    DiscoverByCategoriesView(viewModel: recipeViewModel)
                 }
                 .padding()
             }
