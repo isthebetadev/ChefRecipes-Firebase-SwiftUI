@@ -11,6 +11,7 @@ final class RecipeViewModel: ObservableObject {
     
     @Published var myRecipes: [MyRecipeModel] = []
     @Published var recipesInTopThreeRanking: [MyRecipeModel] = []
+    @Published var recipesForCategory: [MyRecipeModel] = []
     @Published var recipeOfTheDay: MyRecipeModel?
     @Published var messageError: String?
     
@@ -20,6 +21,17 @@ final class RecipeViewModel: ObservableObject {
         self.recipeRepository = recipeRepository
         updateRecipeOfTheDay()
         updateTopThreeSavedRecipes()
+    }
+    
+    func getRecipesForCategory(theCategory category: String) {
+        recipeRepository.getRecipesForCategory(category: category) { [weak self] result in
+            switch result {
+            case .success(let recipeModels):
+                self?.recipesForCategory = recipeModels
+            case .failure(let error):
+                self?.messageError = error.localizedDescription
+            }
+        }
     }
     
     func updateTopThreeSavedRecipes() {

@@ -27,6 +27,24 @@ final class RecipeDataSource {
     private let database = Firestore.firestore()
     private let recipesCollection = "recipes"
     
+    func getRecipesForCategory(category: String,completionBlock: @escaping (Result<[MyRecipeModel], Error>) -> Void) {
+        database.collection(recipesCollection).whereField("category", isEqualTo: category)
+            .addSnapshotListener { query, error in
+                if let error = error {
+                    print("❌ Error getting recipes for category \(category) -> \(error.localizedDescription)")
+                    completionBlock(.failure(error))
+                    return
+                }
+                guard let documents = query?.documents.compactMap({ $0 }) else {
+                    completionBlock(.success([]))
+                    return
+                }
+                let recipes = documents.map { try? $0.data(as: MyRecipeModel.self) }
+                                     .compactMap { $0 }
+                completionBlock(.success(recipes))
+            }
+    }
+    
     func getAllRecipes(completionBlock: @escaping (Result<[MyRecipeModel], Error>) -> Void) {
         database.collection(recipesCollection)
             .addSnapshotListener { query, error in
