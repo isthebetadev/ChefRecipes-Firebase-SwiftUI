@@ -24,6 +24,25 @@ final class RecipeViewModel: ObservableObject {
         updateTopThreeSavedRecipes()
     }
     
+    func searchRecipesByTitle(with searchText: String) {
+        recipeRepository.searchRecipes(searchText: searchText) { [weak self] result in
+            switch result {
+            case .success(let recipeModels):
+                let recipes: [MyRecipeModel] = recipeModels
+                self?.searchedRecipes = []
+                if !recipes.isEmpty {
+                    for recipe in recipes {
+                        if recipe.title.contains(searchText) {
+                            self?.searchedRecipes.append(recipe)
+                        }
+                    }
+                }
+            case .failure(let error):
+                self?.messageError = error.localizedDescription
+            }
+        }
+    }
+    
     func getRecipesForCategory(theCategory category: String) {
         recipeRepository.getRecipesForCategory(category: category) { [weak self] result in
             switch result {
