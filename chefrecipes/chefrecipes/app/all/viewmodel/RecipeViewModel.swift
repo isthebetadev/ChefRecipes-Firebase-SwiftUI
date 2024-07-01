@@ -12,6 +12,7 @@ final class RecipeViewModel: ObservableObject {
     @Published var myRecipes: [MyRecipeModel] = []
     @Published var recipesInTopThreeRanking: [MyRecipeModel] = []
     @Published var recipesForCategory: [MyRecipeModel] = []
+    @Published var searchedRecipes: [MyRecipeModel] = []
     @Published var recipeOfTheDay: MyRecipeModel?
     @Published var messageError: String?
     

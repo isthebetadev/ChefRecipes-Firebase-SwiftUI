@@ -21,7 +21,7 @@ struct HomeView: View {
                             Text("Home")
                         }
                     
-                    Text("Search recipes view")
+                    SearchView()
                         .tabItem {
                             Image(systemName: "magnifyingglass")
                                 .foregroundStyle(.black)
